@@ -4,16 +4,47 @@ import peopleIcon from "../assets/people.png";
 import calendarIcon from "../assets/calendar.png";
 import locationIcon from "../assets/location.png";
 import { FaPlane } from "react-icons/fa";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPerson, faCalendar } from "@fortawesome/free-solid-svg-icons";
 
-const SearchBar = () => {
+const SearchBar = ({ setCities }) => {
+
   const [destination, setDestination] = useState("");
   const [date, setDate] = useState("");
   const [reservations, setReservations] = useState("");
 
   const navigate = useNavigate();
 
-  const handleSearch = () => {
-    console.log({ destination, date, reservations });
+ /*  const handleSearch = async () => {
+    try {
+  
+      const response = await fetch(`http://localhost:8080/api/cities/exactDestination?destination=${destination}`);
+      const data = await response.json();
+      setCities(data); 
+    } catch (error) {
+      console.error("Error fetching cities:", error);
+    }
+  }; */
+
+  const handleSearch = async () => {
+    try {
+      let url = "http://localhost:8080/api/cities/compoundSearch?";
+      if (destination) {
+        url += `destination=${destination}&`;
+      }
+      if (date) {
+        url += `departureDate=${date}&`;
+      }
+      if (reservations) {
+        url += `maxPeople=${reservations}`;
+      }
+
+      const response = await fetch(url);
+      const data = await response.json();
+      setCities(data); 
+    } catch (error) {
+      console.error("Error fetching cities:", error);
+    }
   };
 
   const handleExploreClick = () => {
@@ -36,7 +67,7 @@ const SearchBar = () => {
       </div>
       
 
-      <div className="mt-8 mx-4 sm:mx-10 px-4 py-0 sm:px-6 xl:py-2 md:py-2 sm:py-2 bg-white rounded-md shadow-md w-full sm:w-2/3 md:w-11/12 xl:w-2/3 max-w-full sm:max-w-none">
+      <div className="mt-2 mx-4 sm:mx-10 px-4 py-0 sm:px-6 xl:py-2 md:py-2 sm:py-2 bg-white rounded-md shadow-md w-full sm:w-2/3 md:w-11/12 xl:w-2/3 max-w-full sm:max-w-none">
         <div className="flex flex-col sm:flex-row justify-between gap-2">
           <div className="flex flex-col flex-1">
             <div className="flex items-center">
@@ -46,7 +77,7 @@ const SearchBar = () => {
                 className="w-5 h-5 mr-2 invisible sm:visible"
               />
               <label
-                className="mb-1 font-semibold text-black font-poppins invisible sm:visible"
+                className="mb-1 font-semibold text-black font-poppins invisible sm:visible text-sm md:text-sm xl:text-base"
                 htmlFor="destination"
               >
                 Destination
@@ -58,19 +89,16 @@ const SearchBar = () => {
               placeholder="Search Destinations"
               value={destination}
               onChange={(e) => setDestination(e.target.value)}
-              className="w-full px-2 py-1 my-0  mt-0    sm:py-1 sm:my-2 md:py-1 md:my-2 xl:py-1 xl:my-2 order border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-800 focus:border-slate-400 transition duration-200 ease-in-out text-black font-light text-sm sm:text-base"
+              className="w-full px-2 py-1 my-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-800 focus:border-slate-400 transition duration-200 ease-in-out text-black font-light text-sm md:text-sm xl:text-base"
             />
           </div>
 
           <div className="hidden md:flex flex-col flex-1">
             <div className="flex items-center">
-              <img
-                src={calendarIcon}
-                alt="Ícono de Fecha"
-                className="w-5 h-5 mr-2"
-              />
+            <FontAwesomeIcon icon={faCalendar} className="text-sky-800 text-base mx-2" />
+
               <label
-                className="mb-1 font-semibold text-black font-poppins"
+                className="mb-1 font-semibold text-black font-poppins text-sm md:text-sm xl:text-base"
                 htmlFor="date"
               >
                 Date
@@ -81,15 +109,15 @@ const SearchBar = () => {
               id="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              className="w-full px-2 py-1 my-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-800 focus:border-slate-400 transition duration-200 ease-in-out text-black font-light text-sm sm:text-base"
+              className="w-full px-2 py-1 my-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-800 focus:border-slate-400 transition duration-200 ease-in-out text-black font-light text-sm md:text-sm xl:text-base"
             />
           </div>
 
           <div className="hidden md:flex flex-col flex-1">
             <div className="flex items-center">
-              <img src={peopleIcon} className="w-5 h-5 mr-2" />
+            <FontAwesomeIcon icon={faPerson} className="text-yellow-500 text-base mx-2" />
               <label
-                className="mb-1 text-md font-semibold text-black font-poppins"
+                className="mb-1 text-md font-semibold text-black font-poppins text-sm md:text-sm xl:text-base"
                 htmlFor="reservations"
               >
                 Reservations
@@ -98,10 +126,10 @@ const SearchBar = () => {
             <input
               type="number"
               id="reservations"
-              placeholder="Number of Reservations"
+              placeholder="Max. Number of Reservations"
               value={reservations}
               onChange={(e) => setReservations(e.target.value)}
-              className="w-full px-2 py-1 my-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-800 focus:border-slate-400 transition duration-200 ease-in-out text-black font-light text-sm sm:text-base"
+              className="w-full px-2 py-1 my-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-800 focus:border-slate-400 transition duration-200 ease-in-out text-black font-light text-sm md:text-sm xl:text-base"
             />
           </div>
 
@@ -112,7 +140,7 @@ const SearchBar = () => {
             <div className="flex flex-col sm:flex-row sm:items-end w-full sm:w-auto">
               <button
                 onClick={handleSearch}
-                className="bg-black text-white font-bold px-4 py-2  mb-4    sm:py-1 sm:my-2 md:py-1 md:my-2 xl:py-1 xl:my-2  w-full sm:w-auto rounded-full hover:bg-blue-600 hover:text-white hover:shadow-lg transition-all duration-200 text-sm sm:text-base"
+                className="bg-black text-white font-bold px-4 py-2  mb-4    sm:py-1 sm:my-2 md:py-1 md:my-2 xl:py-1 xl:my-2  w-full sm:w-auto rounded-full hover:bg-blue-600 hover:text-white hover:shadow-lg transition-all duration-200 text-sm md:text-sm xl:text-base"
               >
                 Search
               </button>

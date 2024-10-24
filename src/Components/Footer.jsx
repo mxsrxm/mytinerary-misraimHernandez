@@ -21,18 +21,20 @@ export default function Footer() {
       <NewsletterForm></NewsletterForm>
 
       <footer className="bg-white md:px-10 rounded-lg shadow-lg">
-        <div className=" grid grid-cols-1 md:grid-cols-3 items-start">
-          <div className="md:col-span-1">
-            <FooterMap />
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 items-start">
+          <div className="flex justify-center md:col-span-1">
+            <FooterMap className="mx-auto sm:mx-0"></FooterMap>
           </div>
-          <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <FooterLinks routes={routes}> </FooterLinks>
+          <div className="flex justify-start md:col-span-1">
+            <FooterLinks routes={routes}></FooterLinks>
+          </div>
+          <div className="flex justify-start md:col-span-1">
             <FooterPopularActivities></FooterPopularActivities>
+          </div>
+          <div className="flex justify-start md:col-span-1">
             <FooterSocialLinks></FooterSocialLinks>
           </div>
         </div>
-
-        <div className=" grid grid-cols-1 md:grid-cols-2 gap-8"></div>
       </footer>
 
       <FooterDeveloper></FooterDeveloper>

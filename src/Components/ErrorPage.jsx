@@ -9,7 +9,7 @@ const ErrorPage = () => {
 
   return (
     <>
-      <div className="relative bg-cover bg-center mx-3 mt-3 w-[calc(100vw-2rem)] h-[calc(100vh-2rem)] bg-[url('https://ibw.bwnet.com.tw/AC_Gallery/2023/02/356e63dc-3da5-4967-7741-a7954d47228a.png')] rounded-2xl overflow-hidden">
+      <div className="relative bg-cover bg-center mx-3 mt-3 w-[calc(100vw-2rem)] h-[calc(100vh-2rem)] bg-[url('https://d3t4nwcgmfrp9x.cloudfront.net/upload/vuelos-ninguna-parte-alternativa-viajes-tiempos-pandemia-643x342.jpg')] rounded-2xl overflow-hidden">
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="relative flex flex-col items-center justify-center h-full px-8 text-white rounded-lg shadow-lg text-center">
           <div className="flex items-center mb-4">

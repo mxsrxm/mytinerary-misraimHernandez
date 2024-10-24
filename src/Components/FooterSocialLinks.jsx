@@ -13,11 +13,13 @@ const socialLinks = [
 export default function SocialLinks() {
   return (
     <>
-      <div className="p-5">
-        <h3 className="font-semibold text-gray-700 mb-2">Social Media</h3>
-        <ul className="flex flex-col gap-4">
+      <div className="p-4">
+        <h3 className="font-semibold text-gray-700 text-lg mb-2">
+          Social Media
+        </h3>
+        <ul className="flex flex-col gap-2">
           {socialLinks.map((link, index) => (
-            <li key={index} className="flex items-center py-2 px-2">
+            <li key={index} className="flex items-center">
               <NavLink
                 to={link.to}
                 target="_blank"
@@ -25,7 +27,7 @@ export default function SocialLinks() {
                 className="flex items-center"
               >
                 <img src={link.icon} alt={link.text} className="w-6" />
-                <span className="text-gray-600 ml-1">{link.text}</span>
+                <span className="text-gray-600 text-sm ml-1">{link.text}</span>
               </NavLink>
             </li>
           ))}
