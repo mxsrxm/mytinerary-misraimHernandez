@@ -1,51 +1,26 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import peopleIcon from "../assets/people.png";
-import calendarIcon from "../assets/calendar.png";
 import locationIcon from "../assets/location.png";
 import { FaPlane } from "react-icons/fa";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPerson, faCalendar } from "@fortawesome/free-solid-svg-icons";
 
 const SearchBar = ({ setCities }) => {
 
-  const [destination, setDestination] = useState("");
-  const [date, setDate] = useState("");
-  const [reservations, setReservations] = useState("");
+  const [city, setDestination] = useState("");
 
   const navigate = useNavigate();
 
- /*  const handleSearch = async () => {
+   const handleSearch = async () => {
     try {
   
-      const response = await fetch(`http://localhost:8080/api/cities/exactDestination?destination=${destination}`);
+      const response = await fetch(`http://localhost:8080/api/cities/city/${city}`);
       const data = await response.json();
       setCities(data); 
     } catch (error) {
       console.error("Error fetching cities:", error);
     }
-  }; */
+  }; 
 
-  const handleSearch = async () => {
-    try {
-      let url = "http://localhost:8080/api/cities/compoundSearch?";
-      if (destination) {
-        url += `destination=${destination}&`;
-      }
-      if (date) {
-        url += `departureDate=${date}&`;
-      }
-      if (reservations) {
-        url += `maxPeople=${reservations}`;
-      }
 
-      const response = await fetch(url);
-      const data = await response.json();
-      setCities(data); 
-    } catch (error) {
-      console.error("Error fetching cities:", error);
-    }
-  };
 
   const handleExploreClick = () => {
     navigate("/cities");
@@ -87,52 +62,13 @@ const SearchBar = ({ setCities }) => {
               type="text"
               id="destination"
               placeholder="Search Destinations"
-              value={destination}
+              value={city}
               onChange={(e) => setDestination(e.target.value)}
               className="w-full px-2 py-1 my-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-800 focus:border-slate-400 transition duration-200 ease-in-out text-black font-light text-sm md:text-sm xl:text-base"
             />
           </div>
 
-          <div className="hidden md:flex flex-col flex-1">
-            <div className="flex items-center">
-            <FontAwesomeIcon icon={faCalendar} className="text-sky-800 text-base mx-2" />
-
-              <label
-                className="mb-1 font-semibold text-black font-poppins text-sm md:text-sm xl:text-base"
-                htmlFor="date"
-              >
-                Date
-              </label>
-            </div>
-            <input
-              type="date"
-              id="date"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              className="w-full px-2 py-1 my-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-800 focus:border-slate-400 transition duration-200 ease-in-out text-black font-light text-sm md:text-sm xl:text-base"
-            />
-          </div>
-
-          <div className="hidden md:flex flex-col flex-1">
-            <div className="flex items-center">
-            <FontAwesomeIcon icon={faPerson} className="text-yellow-500 text-base mx-2" />
-              <label
-                className="mb-1 text-md font-semibold text-black font-poppins text-sm md:text-sm xl:text-base"
-                htmlFor="reservations"
-              >
-                Reservations
-              </label>
-            </div>
-            <input
-              type="number"
-              id="reservations"
-              placeholder="Max. Number of Reservations"
-              value={reservations}
-              onChange={(e) => setReservations(e.target.value)}
-              className="w-full px-2 py-1 my-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-800 focus:border-slate-400 transition duration-200 ease-in-out text-black font-light text-sm md:text-sm xl:text-base"
-            />
-          </div>
-
+         
           <div className="flex flex-col sm:items-end">
             <label className="mb-1 text-md font-semibold invisible">
               Search

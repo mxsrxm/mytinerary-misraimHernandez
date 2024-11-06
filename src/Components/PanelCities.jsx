@@ -1,33 +1,38 @@
 import React from "react";
 import CitiesCard from "./CitiesCard";
-import logo from "../assets/logo.png";
-
+import Gif from "../assets/404Horse.gif";
 
 const PanelCities = ({ cities }) => {
   const listCities = cities.response || [];
 
   return (
     <>
-      <div className="flex justify-center">
-        <div className="w-full">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-            {listCities.length > 0 ? (listCities.map((event) => (
-              <CitiesCard key={event._id} event={event} ></CitiesCard>
-            ))
+      <div className="bg-gray-100 py-8">
+        <div className="flex justify-center">
+          <div className="w-full">
+            {listCities.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
+                {listCities.map((event) => (
+                  <CitiesCard key={event._id} event={event} />
+                ))}
+              </div>
             ) : (
-              <div className="relative bg-cover   bg-center w-96 m-10 bg-[url('https://www.kebuena.com.mx/wp-content/uploads/2018/01/Sahara-1.jpg')] rounded-2xl overflow-hidden">
-                <div className="absolute inset-0 bg-black opacity-50"></div>
-                <div className="relative flex flex-col items-center justify-center h-full px-8 text-white rounded-lg shadow-lg text-center">
-                  <div className="flex items-center mb-4">
-                    {/* <img
-                      src={logo}
-                      alt="Logo"
-                      className="w-24 h-24 mr-4 rounded-full shadow-lg"
-                    /> */}
-                  </div>
-                  <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold drop-shadow-lg">
-                    Sorry, No cities found.
+              <div className="bg-white ">
+                <div className=" flex flex-col items-center justify-center h-full text-black pt-8">
+
+                  <h1 className="text-lg font-extrabold drop-shadow-lg xs:text-lg sm:tex-lg md:text-2xl xl:text-4xl ">
+                    No Cities found for this search
                   </h1>
+
+                  <p className="text-sm font-bold drop-shadow-lg xs:text-sm sm:text-sm md:text-lg xl:text-xxl">
+                    Please try again with another search
+                  </p>
+
+                  <div className="flex items-center justify-center">
+                    <img src={Gif} alt="404" className="w-1/2" />
+                  </div>
+
+
                 </div>
               </div>
             )}

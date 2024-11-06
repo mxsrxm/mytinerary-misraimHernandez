@@ -3,20 +3,27 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faComment } from "@fortawesome/free-solid-svg-icons";
 import peopleIcon from "../assets/people.png";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 const MiniCard = ({ event }) => {
+  const navigate = useNavigate();
+
+  const handleReadNow = () => {
+    navigate(`/Details/${event._id}`, { state: event });
+  };
+
   return (
     <>
-      <div className="bg-white rounded-lg shadow-md overflow-hidden relative">
+      <div className="bg-white rounded-lg shadow-md overflow-hidden relative" onClick={handleReadNow}>
         <div className="relative">
           <img
-            src={event.activityImage}
-            alt={event.destination}
+            src={event.cityImage}
+            alt={event.city}
             className="w-full h-52 object-cover"
           />
           <div className="absolute inset-0 bg-black opacity-40"></div>
           <h2 className="absolute top-2 left-2 text-white text-lg font-semibold md:text-base sm:text-sm">
-            {event.destination}
+            {event.city}
           </h2>
           <p className="absolute bottom-2 left-2 text-white text-sm md:text-xs sm:text-xs bg-black bg-opacity-50 p-1 rounded">
             {event.shortDescription}
@@ -33,8 +40,12 @@ const MiniCard = ({ event }) => {
                 />
                 <span className="text-base md:text-xs">{event.likes}</span>
               </div>
-              <p className="font-bold mt-1 text-base md:text-xs">
+              {/* <p className="font-bold mt-1 text-base md:text-xs">
                 ${event.price}
+              </p> */}
+
+              <p className="font-bold mt-1 text-base md:text-xs">
+                {event.climate}
               </p>
             </div>
 
@@ -47,12 +58,12 @@ const MiniCard = ({ event }) => {
                 <span className="text-base md:text-xs">{event.comments}</span>
               </div>
               <div className="flex items-center mt-1">
-                <img
+                {/*  <img
                   src={peopleIcon}
                   alt="People Icon"
                   className="w-4 h-4 mr-1 md:w-3 md:h-3"
                 />
-                <span className="text-base md:text-xs">{event.maxPeople}</span>
+                <span className="text-base md:text-xs">{event.maxPeople}</span> */}
               </div>
             </div>
 

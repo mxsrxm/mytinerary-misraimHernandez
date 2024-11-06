@@ -5,20 +5,20 @@ import logo from "../assets/logo.png";
 import PanelCities from "../Components/PanelCities";
 
 const Cities = () => {
-  const [cities, setCities] = useState([]); 
+  const [cities, setCities] = useState([]);
   useEffect(() => {
     const fetchAllCities = async () => {
       try {
         const response = await fetch("http://localhost:8080/api/cities/all");
         const data = await response.json();
-        setCities(data); 
+        setCities(data);
       } catch (error) {
         console.error("Error fetching cities:", error);
       }
     };
 
     fetchAllCities();
-  }, []);  
+  }, []);
 
   return (
     <>
@@ -35,15 +35,18 @@ const Cities = () => {
                 <img
                   src={logo}
                   alt="Logo"
-                  className="w-16 h-16 mr-4 rounded-full shadow-lg"
+                  className="w-20 h-20 mr-4 rounded-full shadow-lg"
                 />
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold">
-                  Cities
-                </h1>
+                <div className="text-center">
+                  <h1 className="text-3xl font-bold text-gray-800">
+                    Explore Our Cities
+                  </h1>
+                  <p className="text-gray-600 ">Find your next adventure!</p>
+                </div>
               </div>
             </div>
 
-            <PanelCities cities={cities} /> 
+            <PanelCities cities={cities} ></PanelCities>
           </div>
         </div>
       </div>
